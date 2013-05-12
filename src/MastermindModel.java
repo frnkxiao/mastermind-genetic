@@ -16,8 +16,8 @@ public class MastermindModel {
 	    public static final int TIMESTOGUESS = 10;
 		
 		
-		private Vector<Integer> pcolors;  			// array of picked up colors
-		private Vector<Integer> evals; 				// evaluation results
+		public static  Vector<Integer> pcolors;  			// array of picked up colors
+		public static  Vector<Integer> evals; 				// evaluation results
 		
 		private int[] scolors = new int[GUESSCOLORS];
 		private int gstatus;

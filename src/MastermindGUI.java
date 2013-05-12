@@ -15,7 +15,7 @@ public class MastermindGUI extends JApplet{
 	//================================================================ constants
 	private static final int CELL_SIZE = 30; // Pixels
     private static final int BOARDWIDTH = 8*CELL_SIZE;
-    private static final Color[] COLORS = {Color.RED, Color.PINK, Color.BLUE, Color.GREEN, Color.YELLOW, Color.ORANGE};
+    private static final Color[] COLORS = {Color.RED, Color.WHITE, Color.BLUE, Color.GREEN, Color.YELLOW, Color.BLACK};
         
     private static final int tshft = 6;
     private static final int lshft = 1;
@@ -24,7 +24,7 @@ public class MastermindGUI extends JApplet{
     private GameColors  _availableColors;
     private GameResults _resultDisplay;
     private MastermindModel  _gameLogic   = new MastermindModel();
-    
+    private MMGeneticAlgorithm ga = new MMGeneticAlgorithm();
     //============================================================== method main
     // If used as an applet, main will never be called.
     // If used as an application, this main will be called and it will use 
@@ -78,6 +78,11 @@ public class MastermindGUI extends JApplet{
         
         //-- Add action listener to Demo button.
         demoButton.addActionListener(new DemoAction());
+        
+        int [] pcolors = ga.getFirstGuess();
+        for (int i=0; i<pcolors.length; i++)
+            _gameLogic.add(pcolors[i]);
+        _resultDisplay.repaint();
     }
     
     ////////////////////////////////////////////////// inner class NewGameAction
@@ -108,6 +113,11 @@ public class MastermindGUI extends JApplet{
         		_gameLogic.setNextGuess();
         	}  
         	
+                int [] pcolors = ga.getNextGuess();
+        for (int i=0; i<pcolors.length; i++)
+            _gameLogic.add(pcolors[i]);
+        
+                
         	_resultDisplay.repaint();  // Show updated results
         }
     }
