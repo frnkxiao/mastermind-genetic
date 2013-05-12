@@ -7,7 +7,7 @@ import org.apache.commons.math3.genetics.Chromosome;
 
 public class MMChromosome extends Chromosome{
     
-    int [] encoding = new int [MastermindModel.GUESSCOLORS];
+    int [] encoding;
     
     public MMChromosome (int [] encoding){
         this.encoding = encoding;
@@ -19,9 +19,9 @@ public class MMChromosome extends Chromosome{
     
    double evaluate (List <Integer> scolors) {
         
-        int [] pcolors  = encoding;
-        //System.out.println(encoding.length + " " + pcolors.size());
-        boolean result = true;
+        
+        System.out.println(encoding.length + " " + scolors.size());
+       
 	int numExactMatches = 0;
 	int numColorMatches = 0;
 	
@@ -30,8 +30,8 @@ public class MMChromosome extends Chromosome{
 			
 	
 	for (int i = 0; i< MastermindModel.GUESSCOLORS;i++){
-            if ( pcolors[i] !=(scolors.get(i))){
-		unmatchedGuess.add(pcolors[i]);
+            if ( encoding[i] !=(scolors.get(i))){
+		unmatchedGuess.add(encoding[i]);
 		unmatchedSecret.add(scolors.get(i));
 	
             }
