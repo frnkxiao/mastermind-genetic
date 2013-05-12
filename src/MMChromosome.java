@@ -11,6 +11,7 @@ public class MMChromosome extends Chromosome{
     
     public MMChromosome (int [] encoding){
         this.encoding = encoding;
+       // System.out.println(this);
     }
     
     int [] getEncoding (){
@@ -20,7 +21,7 @@ public class MMChromosome extends Chromosome{
    double evaluate (List <Integer> scolors) {
         
         
-        System.out.println(encoding.length + " " + scolors.size());
+       // System.out.println(encoding.length + " " + scolors.size());
        
 	int numExactMatches = 0;
 	int numColorMatches = 0;
@@ -57,21 +58,34 @@ public class MMChromosome extends Chromosome{
     }
     
     private double V (int pos, int col){
-        return (1.1*pos + col)/4.4;
+        double r =  (1.1*pos + col)/4.4;
+        
+        return r;
     }
     
     @Override
     public double fitness() {
-        int sum=0;
+        double fitness;
+        double sum=0;
         //Integer [] pcolorsArr = new Integer[MastermindModel.GUESSCOLORS];
         
         int numGuesses = MastermindModel.pcolors.size() / MastermindModel.GUESSCOLORS;
+        //System.out.println("Number of guesses = "+ numGuesses + " "+  MastermindModel.pcolors.size());
         for (int i = 0; i<numGuesses; i++){
-            sum +=V(MastermindModel.evals.get(2*i), MastermindModel.evals.get(2*i+1))* evaluate(MastermindModel.pcolors.subList(4*i,i+4));
+            sum +=V(MastermindModel.evals.get(2*i), MastermindModel.evals.get(2*i+1))* evaluate(MastermindModel.pcolors.subList(4*i,4*i+4));
         }
-            
-       return sum  / numGuesses;
+       
+       fitness = sum*1.00 / numGuesses;
+       System.out.println(this + " fitness = " + sum + " / " + numGuesses + " = " + fitness);
+       return fitness;
         
+    }
+    
+    public String toString (){
+        String s = "";
+        for (int i=0; i<encoding.length; i++)
+            s = s+encoding[i];
+        return s;
     }
     
 }

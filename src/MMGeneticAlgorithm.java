@@ -37,7 +37,7 @@ public class MMGeneticAlgorithm {
             }
         }
         */
-        population = new ElitisticListPopulation(500,.33);
+        population = new ElitisticListPopulation(200,.05);
         
         for (int i = 0; i< MastermindModel.GUESSCOLORS;i++)
             guess[i]=i;
@@ -82,19 +82,15 @@ public class MMGeneticAlgorithm {
         
     }
     
-    
-    
-    
-    
-    
+      
     
     public MMGeneticAlgorithm (){
          init();
          ga = new GeneticAlgorithm(
          new MMCrossoverPolicy(),
-                    0.2,
+                    0.1,
                    new MMMutationPolicy(),
-                   0.90,
+                   0.10,
                new MMSelectionPolicy()
                 );
 
