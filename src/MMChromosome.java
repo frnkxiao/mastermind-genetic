@@ -30,8 +30,8 @@ public class MMChromosome extends Chromosome{
 			
 	
 	for (int i = 0; i< MastermindModel.GUESSCOLORS;i++){
-            if ( pcolors.get(i) !=(scolors.get(i))){
-		unmatchedGuess.add(pcolors.get(i));
+            if ( pcolors[i] !=(scolors.get(i))){
+		unmatchedGuess.add(pcolors[i]);
 		unmatchedSecret.add(scolors.get(i));
 	
             }
