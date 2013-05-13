@@ -82,8 +82,6 @@ public class MMGeneticAlgorithm {
         
     }
     
-      
-    
     public MMGeneticAlgorithm (){
          init();
          ga = new GeneticAlgorithm(

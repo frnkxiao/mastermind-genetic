@@ -79,10 +79,11 @@ public class MastermindGUI extends JApplet{
         //-- Add action listener to Demo button.
         demoButton.addActionListener(new DemoAction());
         
-        int [] pcolors = ga.getFirstGuess();
+       /* int [] pcolors = ga.getFirstGuess();
         for (int i=0; i<pcolors.length; i++)
             _gameLogic.add(pcolors[i]);
         _resultDisplay.repaint();
+        */
     }
     
     ////////////////////////////////////////////////// inner class NewGameAction
@@ -107,17 +108,16 @@ public class MastermindGUI extends JApplet{
     ////////////////////////////////////////////////// inner class CheckAction
     private class CheckAction implements ActionListener {
         public void actionPerformed(ActionEvent e) {
+        	check();
+        }
+        
+        public void check(){
         	_gameLogic.checkGame();
         	
         	if (_gameLogic.getGameStatus() == MastermindModel.CHECK) {
         		_gameLogic.setNextGuess();
         	}  
         	
-                int [] pcolors = ga.getNextGuess();
-        for (int i=0; i<pcolors.length; i++)
-            _gameLogic.add(pcolors[i]);
-        
-                
         	_resultDisplay.repaint();  // Show updated results
         }
     }
@@ -125,9 +125,22 @@ public class MastermindGUI extends JApplet{
     //////////////////////////////////////////////////inner class CheckAction
     private class DemoAction implements ActionListener {
     	public void actionPerformed(ActionEvent e) {
-    	// To be done.
+    		CheckAction nchkac = new CheckAction();
     		
-    	}
+    		
+    		int [] pcolors = ga.getFirstGuess();             
+            
+            while (_gameLogic.getGameStatus() == MastermindModel.CONTINUE) {
+            	 for (int i=0; i<pcolors.length; i++)
+                     _gameLogic.add(pcolors[i]);
+            	 
+            	 nchkac.check();            	 
+            	 
+            	 pcolors = ga.getNextGuess();
+            }
+     
+       }
+    		
     }
 
     ////////////////////////////////////////////////////// inner class GameResults
